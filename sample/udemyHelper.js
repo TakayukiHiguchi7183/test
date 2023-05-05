@@ -25,11 +25,36 @@ const write=function(){
     });
 }
 
+const readJson=function(){
+    //sample.jsonの文字読み込み→JSONとして読み込み→中身を出力
+    console.log("JSON読み込み開始");
+    fs.readFile("./sample.json", "utf8", function(err, data){
+        //StringをJSONに復元
+        const person=JSON.parse(data);
+        console.log(person.name);
+    });
+    console.log("読み込み完了");
+}
+
+const writeJson=function(){
+    //sample.json作成
+    console.log("JSON作成開始");
+    const person={
+        name: "Mike",
+        age: 30
+    }
+    fs.writeFile("sample.json", JSON.stringify(person), function(){
+        console.log("作成完了");
+    });
+}
+
 //定数を他ファイルで使えるようにする
 //複数エクスポート時は以下の形式（JSON）で
 module.exports={
     namae: name,
     tashizan: add,
-    yomikomi: read,
-    kakikomi: write
+    read: read,
+    write: write,
+    readJson: readJson,
+    writeJson: writeJson
 }
