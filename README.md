@@ -20,3 +20,8 @@ https://www.npmjs.com/package/express?activeTab=readme
 ・Sampleをindex.jsにコピー
 ・「localhost:3000」でアクセス
 →簡単なページが表示される
+
+2023/5/6_2
+・Mac環境内にnodemon追加。
+→nodemon [File]　で編集後の再起動を自動でやってくれる
+https://www.npmjs.com/package/nodemon
