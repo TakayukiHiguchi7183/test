@@ -9,6 +9,13 @@ app.use(express.urlencoded({extended: false}))
 //public配下をフロントエンドに設定
 app.use(express.static(path.join(__dirname, "public")));
 
+
+//サーバーを起動
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, function(){
+    console.log("I am running!");
+});
+
 //ページにアクセスした時の処理
 app.get('/access', function (req, res) {
     //アクセス時刻を取得
@@ -45,12 +52,6 @@ app.post('/api/v1/quiz', function (req, res) {
 app.get('/manage', function (req, res) {
     console.log("管理者ページの出力");
     res.send('<h1>管理用ページです!</h1><h3>直書きでhtmlを返却することもできます</h3>')
-});
-
-//サーバーを起動
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, function(){
-    console.log("I am running!");
 });
 
 console.log("最終行です");
