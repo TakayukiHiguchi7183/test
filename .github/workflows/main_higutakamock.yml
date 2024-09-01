@@ -19,11 +19,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-      - name: Create release build
-        run: |
-          npm install
-          npm run build
-        working-directory: ./src
+      - run: npm install --if-present
+      - run: npm run build
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -34,4 +31,4 @@ jobs:
       with:
         app-name: 'higutakaMock'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_HIGUTAKAMOCK }}
-        package: .src
+        package: src
