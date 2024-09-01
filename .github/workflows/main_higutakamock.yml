@@ -1,42 +1,22 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - higutakaMock
+name: Build and deploy higutakaMock
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
-
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: node-app
-      
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A41A25DA90DC4F01A10B6DFBC487A622 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_4B56010DD1AE49B58B0A1274B0630086 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_44206E80BEBD4E38BE6973A1D29933A4 }}
-
-      - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v3
-        id: deploy-to-webapp
-        with:
-          app-name: 'higutakaMock'
-          slot-name: 'Production'
-          package: .
-          
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: 'higutakaMock'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_HIGUTAKAMOCK }}
+        package: .
